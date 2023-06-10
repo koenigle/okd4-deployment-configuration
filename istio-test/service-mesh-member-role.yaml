@@ -5,4 +5,4 @@ metadata:
   namespace: istio-test
 spec:
   members:
-    - koenigle-test
+    - koenigle-apps-test
