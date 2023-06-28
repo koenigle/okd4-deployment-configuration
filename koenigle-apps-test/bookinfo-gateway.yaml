@@ -18,52 +18,26 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: productpage
+  name: bookinfo
 spec:
   hosts:
-  - productpage
+  - "*"
+  gateways:
+  - bookinfo-gateway
   http:
-  - route:
+  - match:
+    - uri:
+        exact: /productpage
+    - uri:
+        prefix: /static
+    - uri:
+        exact: /login
+    - uri:
+        exact: /logout
+    - uri:
+        prefix: /api/v1/products
+    route:
     - destination:
         host: productpage
-        subset: v1
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: reviews
-spec:
-  hosts:
-  - reviews
-  http:
-  - route:
-    - destination:
-        host: reviews
-        subset: v1
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: ratings
-spec:
-  hosts:
-  - ratings
-  http:
-  - route:
-    - destination:
-        host: ratings
-        subset: v1
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: details
-spec:
-  hosts:
-  - details
-  http:
-  - route:
-    - destination:
-        host: details
-        subset: v1
----
+        port:
+          number: 9080
