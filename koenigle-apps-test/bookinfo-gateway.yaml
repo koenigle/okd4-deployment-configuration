@@ -34,8 +34,16 @@ metadata:
   name: reviews
 spec:
   hosts:
-  - reviews
+    - reviews
   http:
+  - match:
+    - headers:
+        end-user:
+          exact: jason
+    route:
+    - destination:
+        host: reviews
+        subset: v2
   - route:
     - destination:
         host: reviews
