@@ -12,8 +12,6 @@ spec:
       number: 443
       name: https
       protocol: HTTPS
-    tls:
-      mode: PASSTHROUGH
     hosts:
     - "*"
 ---
